@@ -21,6 +21,17 @@
                     <li class="active">
                         <i class="fa fa-file"></i> Blank Page
                     </li>
+                    <?php
+
+                      $sql = "SELECT * FROM users";
+
+                      $user = $database->query($sql);
+
+                      $user_found = mysqli_fetch_array($user);
+
+                      echo $user_found['username'];
+
+                    ?>
                 </ol>
             </div>
         </div>
