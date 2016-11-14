@@ -23,13 +23,11 @@
                     </li>
                     <?php
 
-                      $sql = "SELECT * FROM users";
+                      $a_user = $user->find_all_users();
 
-                      $user = $database->query($sql);
-
-                      $user_found = mysqli_fetch_array($user);
-
-                      echo $user_found['username'];
+                      while($row = mysqli_fetch_assoc($a_user)) {
+                        $row['username']
+                      }
 
                     ?>
                 </ol>
