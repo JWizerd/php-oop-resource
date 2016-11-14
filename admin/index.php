@@ -25,11 +25,13 @@
 
                       $result = User::find_all_users();
 
-                      while($row = mysqli_fetch_assoc($result)) {
-                        echo $row['username'];
-                      }
+                      $test_user = User::get_users_by_id(1);
 
-                      User::get_users_by_id(1);
+                      $dude = User::instantiate($test_user);
+
+                      echo $dude->first_name;
+
+                      $user_objs = new User();
 
                     ?>
                 </ol>
