@@ -8,22 +8,25 @@ class User {
   public $last_name;
   public $user_id;
 
-  public static function find_all_users() {
+  public static function all() {
     global $database;
-    $user_result = self::the_query("SELECT * FROM users");
-    return $user_result;
+    return self::the_query("SELECT * FROM users ");
   }
 
-  public static function get_users_by_id($id) {
+  public static function find_by_id($id) {
     global $database;
-    $user_result = self::the_query("SELECT * FROM users WHERE user_id = $id ");
-    return $user_result;
+    return self::the_query("SELECT * FROM users WHERE user_id = $id ");
   }
 
+  // OBJECT RELATIONAL MAPPING
   public static function the_query($sql) {
     global $database;
     $query = $database->query($sql);
-    return mysqli_fetch_array($query);
+    $object_array = [];
+    while($row = mysqli_fetch_array($query)) {
+      array_push($object_array, self::instantiate($row));
+    }
+    return $object_array;
   }
 
   public static function instantiate($new_user) {
@@ -40,7 +43,7 @@ class User {
     return $user_object;
   }
 
-  private function has_property($property) {
+  public function has_property($property) {
     // grab properties from User object
     $object_properties = get_object_vars($this);
     return array_key_exists($property, $object_properties);

@@ -23,15 +23,14 @@
                     </li>
                     <?php
 
-                      $result = User::find_all_users();
+                      $result = User::all();
 
-                      $test_user = User::get_users_by_id(1);
-
-                      $dude = User::instantiate($test_user);
-
-                      echo $dude->first_name;
-
-                      $user_objs = new User();
+                      foreach($result as $user) {
+                        echo $user->username . "<br>";
+                        echo $user->first_name . "<br>";
+                        echo $user->last_name . "<br>";
+                        echo $user->user_id . "<br>";
+                      }
 
                     ?>
                 </ol>
