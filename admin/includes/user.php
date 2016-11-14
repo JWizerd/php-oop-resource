@@ -9,12 +9,10 @@ class User {
   public $user_id;
 
   public static function all() {
-    global $database;
     return self::the_query("SELECT * FROM users ");
   }
 
   public static function find_by_id($id) {
-    global $database;
     return self::the_query("SELECT * FROM users WHERE user_id = $id ");
   }
 
@@ -23,7 +21,7 @@ class User {
     global $database;
     $query = $database->query($sql);
     $object_array = [];
-    while($row = mysqli_fetch_array($query)) {
+    while($row = $query->fetch_array()) {
       array_push($object_array, self::instantiate($row));
     }
     return $object_array;

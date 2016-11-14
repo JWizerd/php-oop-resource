@@ -32,6 +32,12 @@
                         echo $user->user_id . "<br>";
                       }
 
+                      $result = User::find_by_id(2);
+
+                      foreach($result as $user) {
+                        echo $user->first_name;
+                      }
+
                     ?>
                 </ol>
             </div>
