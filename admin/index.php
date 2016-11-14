@@ -23,11 +23,13 @@
                     </li>
                     <?php
 
-                      $a_user = $user->find_all_users();
+                      $result = User::find_all_users();
 
-                      while($row = mysqli_fetch_assoc($a_user)) {
-                        $row['username']
+                      while($row = mysqli_fetch_assoc($result)) {
+                        echo $row['username'];
                       }
+
+                      User::get_users_by_id(1);
 
                     ?>
                 </ol>
