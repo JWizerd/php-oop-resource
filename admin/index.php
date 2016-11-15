@@ -21,18 +21,6 @@
                     <li class="active">
                         <i class="fa fa-file"></i> Blank Page
                     </li>
-                    <?php
-
-                      $joe =  User::find_by_id(2);
-
-                      print_r($joe);
-
-                      $jim = User::instantiate($joe);
-
-                      print_r($jim);
-
-
-                    ?>
                 </ol>
             </div>
         </div>
