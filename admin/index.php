@@ -23,20 +23,14 @@
                     </li>
                     <?php
 
-                      $result = User::all();
+                      $joe =  User::find_by_id(2);
 
-                      foreach($result as $user) {
-                        echo $user->username . "<br>";
-                        echo $user->first_name . "<br>";
-                        echo $user->last_name . "<br>";
-                        echo $user->user_id . "<br>";
-                      }
+                      print_r($joe);
 
-                      $result = User::find_by_id(2);
+                      $jim = User::instantiate($joe);
 
-                      foreach($result as $user) {
-                        echo $user->first_name;
-                      }
+                      print_r($jim);
+
 
                     ?>
                 </ol>

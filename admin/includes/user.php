@@ -33,11 +33,10 @@ class User {
 
     // iterate through new user array taken from DB. If user array contains a key located in class properties add value of property from assoc db array.
     foreach ($new_user as $property => $value) {
-      if($user_object->has_property($property)) {
+      if(property_exists($user_object, $property)) {
         $user_object->$property = $value;
       }
     }
-
     return $user_object;
   }
 
