@@ -52,7 +52,7 @@ class User {
 
     $user = self::the_query($sql);
 
-    return $user ? !empty($user) : false;
+    return !empty($user) ? array_shift($user) : false;
   }
 }
 

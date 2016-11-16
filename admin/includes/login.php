@@ -3,12 +3,12 @@
 require_once('init.php');
 
 if ($session->is_signed_in()) {
-  redirect("index.php");
+  redirect("../index.php");
 }
 
 if(isset($_POST['submit'])) {
-  $username = trim($_POST['useranme']);
-  $password = trim($_POST['useranme']);
+  $username = trim($_POST['username']);
+  $password = trim($_POST['password']);
 
   // check database for user
   $user_found = User::verify_user($username, $password);
@@ -21,12 +21,20 @@ if(isset($_POST['submit'])) {
     $message = "User could not be found";
     $username = "";
     $password = "";
+    echo $message;
   }
 }
 
 ?>
 
 <form class="" action="login.php" method="post">
-  .form-group 
-  <input type="button" name="name" value="">
+  <div class="form-group">
+    <input class="form-control" type="text" name="username" placeholder="Enter Username" required autocomplete="on">
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="text" name="password" placeholder="Enter Password" required>
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="submit" name="submit">
+  </div>
 </form>
