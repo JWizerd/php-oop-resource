@@ -21,7 +21,7 @@ class Session {
     }
   }
 
-  public function logout($user) {
+  public function logout() {
     unset($_SESSION['user_id']);
     $this->unset_properties();
   }

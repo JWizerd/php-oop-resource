@@ -1,4 +1,11 @@
-<?php include("includes/header.php"); ?>
+<?php
+include("includes/header.php");
+if(!$session->is_signed_in()) {
+  redirect("login.php");
+}
+?>
+
+
 
   <!-- Navigation -->
   <?php include('includes/navigation.php'); ?>
