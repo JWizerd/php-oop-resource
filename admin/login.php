@@ -2,8 +2,6 @@
 
 require_once('includes/header.php');
 
-$message = "Successfully Logged In";
-
 if ($session->is_signed_in()) {
   redirect("index.php");
 }
@@ -20,22 +18,21 @@ if(isset($_POST['submit'])) {
     $session->login($user_found);
     redirect('index.php');
   } else {
-    $message = "<h2 class='text-primary'>User could not be found</h2>";
-    $username = "";
-    $password = "";
+    echo $session->message("<h4 class='bg-danger'>User could not be found</h4>");
+    $username = $_POST['username'];
+    $password = $_POST['password'];
   }
 }
-
 ?>
 
 <div class="col-md-4 col-md-offset-3">
 
-  <h4 class="bg-danger"><?php echo $message; ?></h4>
+  <h2 class="text-primary">Login</h2>
 
-  <form id="login-id" action="" method="post">
+  <form id="login-id" action="" method="post" autocomplete="on">
     <div class="form-group">
     	<label for="username">Username</label>
-    	<input type="text" class="form-control" name="username">
+    	<input type="text" class="form-control" name="username" id="username" value="<?php if (!empty($username)) { echo htmlentities($username); } ?>">
     </div>
 
     <div class="form-group">

@@ -8,6 +8,7 @@ class Session {
   function __construct() {
     session_start();
     $this->logged_in();
+    $this->check_message();
   }
 
   public function is_signed_in() {
@@ -45,7 +46,23 @@ class Session {
     $this->signed_in = false;
   }
 
-  
+  public function message($msg="") {
+    if(!empty($msg)) {
+      $_SESSION['message'] = $msg;
+      return $_SESSION['message'];
+    } else {
+      return $this->message;
+    }
+  }
+
+  private function check_message() {
+    if(isset($_SESSION['message'])) {
+      $this->message = $_SESSION['message'];
+      unset($_SESSION['message']);
+    } else {
+      $this->message = "";
+    }
+  }
 }
 
 $session = new Session();
