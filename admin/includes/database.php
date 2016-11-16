@@ -12,7 +12,7 @@ class Database {
   public function open_db_connection() {
     $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-    if($this->connection->connect_error) {
+    if($this->connection->connect_errno) {
       die('error establishing databse' . $this->connection->connect_error);
     }
   }
@@ -30,7 +30,7 @@ class Database {
   }
 
   public function escape_string($string) {
-    $escaped_string = $this->connection->real_esacpe_string($string);
+    $escaped_string = $this->connection->real_escape_string($string);
     return $escaped_string;
   }
 }

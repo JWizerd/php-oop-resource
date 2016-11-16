@@ -40,10 +40,19 @@ class User {
     return $user_object;
   }
 
-  public function has_property($property) {
-    // grab properties from User object
-    $object_properties = get_object_vars($this);
-    return array_key_exists($property, $object_properties);
+  public static function verify_user($username, $password) {
+    global $database;
+    $username = $database->escape_string($username);
+    $password = $database->escape_string($password);
+
+    $sql  = "SELECT * FROM users WHERE ";
+    $sql .= "username = '{$username}' ";
+    $sql .= "AND password = '{$password}' ";
+    $sql .= "LIMIT 1";
+
+    $user = self::the_query($sql);
+
+    return $user ? !empty($user) : false;
   }
 }
 
