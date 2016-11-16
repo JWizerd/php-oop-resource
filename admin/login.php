@@ -2,6 +2,8 @@
 
 require_once('includes/header.php');
 
+$message = "Successfully Logged In";
+
 if ($session->is_signed_in()) {
   redirect("index.php");
 }
