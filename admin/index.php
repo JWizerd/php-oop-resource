@@ -1,8 +1,8 @@
 <?php
-include("includes/header.php");
-if(!$session->is_signed_in()) {
-  redirect("login.php");
-}
+  include("includes/header.php");
+  if(!$session->is_signed_in()) {
+    redirect("login.php");
+  }
 ?>
 
 
