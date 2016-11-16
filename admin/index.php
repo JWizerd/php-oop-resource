@@ -18,8 +18,7 @@ if(!$session->is_signed_in()) {
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    DASHBOARD
-                    <small>Subheading</small>
+                    Hello, <?php echo User::find_user_by_session_id()->get_full_name(); ?>
                 </h1>
                 <ol class="breadcrumb">
                     <li>
