@@ -16,6 +16,7 @@ class Session {
 
   public function login($user) {
     if($user) {
+      // if user is found in the database set the user_id that is set in SESSION associative array
       $this->user_id = $_SESSION['user_id'] = $user->user_id;
       $this->signed_in = true;
     }
@@ -34,7 +35,7 @@ class Session {
 
     } else {
 
-      $this->unset_properties();
+      $this->logout();
 
     }
   }
