@@ -44,6 +44,8 @@ class Session {
     unset($this->user_id);
     $this->signed_in = false;
   }
+
+  
 }
 
 $session = new Session();

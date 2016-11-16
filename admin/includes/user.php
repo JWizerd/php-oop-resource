@@ -13,7 +13,9 @@ class User {
   }
 
   public static function find_by_id($id) {
-    return self::the_query("SELECT * FROM users WHERE user_id = $id ");
+    $user = self::the_query("SELECT * FROM users WHERE user_id = $id ");
+    return array_shift($user);
+
   }
 
   // OBJECT RELATIONAL MAPPING
@@ -53,6 +55,16 @@ class User {
     $user = self::the_query($sql);
 
     return !empty($user) ? array_shift($user) : false;
+  }
+
+  public static function find_user_by_session_id() {
+    if(isset($_SESSION['user_id'])) {
+      return self::find_by_id($_SESSION['user_id']);
+    }
+  }
+
+  public function get_full_name() {
+    return ucfirst($this->first_name) . " " . ucfirst($this->last_name);
   }
 }
 
