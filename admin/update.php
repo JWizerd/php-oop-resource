@@ -29,7 +29,7 @@ if(isset($_POST['submit'])) {
 
 <div class="col-md-4 col-md-offset-3">
 
-  <h2 class="text-primary">Update</h2>
+  <h2 class="text-primary">Update Details</h2>
 
   <form id="login-id" action="" method="post" autocomplete="on">
     <div class="form-group">
@@ -56,5 +56,14 @@ if(isset($_POST['submit'])) {
       <input type="submit" name="submit" value="Submit" class="btn btn-primary">
     </div>
   </form>
+
+  <a class="btn btn-danger" href="update.php?delete=<?php echo $user->user_id; ?>">Delete Account</a>
+
+  <?php
+  // delete user if delete account button is clicked
+  if(isset($_GET['delete'])) {
+    $user->delete();
+  }
+  ?>
 
 </div>

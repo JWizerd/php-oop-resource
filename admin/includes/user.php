@@ -98,6 +98,15 @@ class User {
 
     return ($database->connection->affected_rows == 1) ? true : false;
   }
+
+  public function delete() {
+    global $database;
+    global $session;
+    $session->logout();
+    $sql = "DELETE FROM users WHERE user_id=" . $database->escape_string($this->user_id);
+    $database->query($sql);
+    redirect("login.php");
+  }
 }
 
 $user = new User();
