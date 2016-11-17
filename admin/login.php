@@ -45,4 +45,6 @@ if(isset($_POST['submit'])) {
     </div>
   </form>
 
+  <a class="btn btn-info" href="signup.php">Sign Up</a>
+
 </div>

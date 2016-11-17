@@ -25,6 +25,13 @@ if(isset($_POST['submit'])) {
     redirect('index.php');
   }
 }
+
+// delete user if delete account button is clicked
+if(isset($_GET['delete'])) {
+  if($_GET['delete'] == $user->user_id) {
+    $user->delete();
+  }
+}
 ?>
 
 <div class="col-md-4 col-md-offset-3">
@@ -58,12 +65,5 @@ if(isset($_POST['submit'])) {
   </form>
 
   <a class="btn btn-danger" href="update.php?delete=<?php echo $user->user_id; ?>">Delete Account</a>
-
-  <?php
-  // delete user if delete account button is clicked
-  if(isset($_GET['delete'])) {
-    $user->delete();
-  }
-  ?>
 
 </div>
