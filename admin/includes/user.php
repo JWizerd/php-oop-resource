@@ -2,11 +2,7 @@
 
 class User {
 
-  public $username;
-  public $password;
-  public $first_name;
-  public $last_name;
-  public $user_id;
+  public $username, $password, $first_name, $last_name, $user_id;
 
   public static function all() {
     return self::the_query("SELECT * FROM users ");
@@ -15,10 +11,8 @@ class User {
   public static function find_by_id($id) {
     $user = self::the_query("SELECT * FROM users WHERE user_id = $id ");
     return array_shift($user);
-
   }
 
-  // OBJECT RELATIONAL MAPPING
   public static function the_query($sql) {
     global $database;
     $query = $database->query($sql);
@@ -30,10 +24,7 @@ class User {
   }
 
   public static function instantiate($new_user) {
-    // creating new user object
     $user_object = new self;
-
-    // iterate through new user array taken from DB. If user array contains a key located in class properties add value of property from assoc db array.
     foreach ($new_user as $property => $value) {
       if(property_exists($user_object, $property)) {
         $user_object->$property = $value;
@@ -101,7 +92,6 @@ class User {
 
   public function delete() {
     global $database;
-
     global $session;
     $session->logout();
 
@@ -109,7 +99,6 @@ class User {
     $database->query($sql);
 
     redirect("login.php");
-
     return ($database->connection->affected_rows == 1) ? true : false;
   }
 }
