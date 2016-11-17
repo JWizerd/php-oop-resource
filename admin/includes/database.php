@@ -33,6 +33,10 @@ class Database {
     $escaped_string = $this->connection->real_escape_string($string);
     return $escaped_string;
   }
+
+  public function insert_id() {
+    return $this->connection->insert_id;
+  }
 }
 
 $database = new Database();

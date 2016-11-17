@@ -66,6 +66,24 @@ class User {
   public function get_full_name() {
     return ucfirst($this->first_name) . " " . ucfirst($this->last_name);
   }
+
+  public function create() {
+    global $database;
+    $sql  = "INSERT INTO users (username, password, first_name, last_name) ";
+    $sql .= "VALUES ('";
+    $sql .= $database->escape_string($this->username) . "', '";
+    $sql .= $database->escape_string($this->password) . "', '";
+    $sql .= $database->escape_string($this->first_name) . "', '";
+    $sql .= $database->escape_string($this->last_name) . "')";
+
+    if ($database->query($sql)) {
+      $this->user_id = $database->insert_id();
+      return true;
+    } else {
+      return false;
+    }
+
+  }
 }
 
 $user = new User();

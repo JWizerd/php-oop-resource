@@ -32,9 +32,9 @@
                   $message = $upload_errors[$the_error];
                   $temp_image = $_FILES['image']['tmp_name'];
                   $image_file = $_FILES['image']['name'];
-                  $image_directory = "images/";
+                  $image_directory = "images";
 
-                  move_uploaded_file($temp_image, $image_directory . $image_file);
+                  move_uploaded_file($temp_image, $image_directory . "/" . $image_file);
                 }
                 ?>
                 <div class="row">
