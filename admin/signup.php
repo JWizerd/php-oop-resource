@@ -8,18 +8,19 @@ if(isset($_POST['submit'])) {
   $first_name = trim($_POST['first_name']);
   $last_name = trim($_POST['last_name']);
 
-  $user = new User();
+  if (User::validate_username($username) == "true") {
+    echo "<h4 class='text-primary'>" . $session->message("Username Taken. Please choose another one.") . "</h4>";
+  } else {
+    $user = new User();
 
-  $user->username = $username;
-  $user->password = $password;
-  $user->first_name = $first_name;
-  $user->last_name = $last_name;
+    $user->username = $username;
+    $user->password = $password;
+    $user->first_name = $first_name;
+    $user->last_name = $last_name;
 
-  if ($user->create()) {
+    $user->create();
     $session->login($user);
     redirect('index.php');
-  } else {
-    echo "<h2>" . $session->message("shut the fuck up") . "</h2>";
   }
 }
 ?>

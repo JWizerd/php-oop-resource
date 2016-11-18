@@ -73,7 +73,13 @@ class User {
     } else {
       return false;
     }
+  }
 
+  public static function validate_username($username) {
+    global $database;
+    $sql = "SELECT * FROM users WHERE username = '$username' ";
+    $users = $database->query($sql)->fetch_array();
+    return (!empty($users)) ? true : false;
   }
 
   public function update() {
