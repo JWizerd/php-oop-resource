@@ -3,9 +3,10 @@
 class User {
 
   public $username, $password, $first_name, $last_name, $user_id;
+  public static $db_table = "users";
 
   public static function all() {
-    return self::the_query("SELECT * FROM users ");
+    return self::the_query("SELECT * FROM " . self::$db_table . " ");
   }
 
   public static function find_by_id($id) {
