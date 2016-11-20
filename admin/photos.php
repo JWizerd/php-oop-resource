@@ -16,12 +16,22 @@
                 </h1>
                 <ol class="breadcrumb">
                     <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                      <i class="fa fa-dashboard"></i><a href="index.php">Dashboard</a>
                     </li>
                     <li class="active">
                         <a href="upload.php"><i class="fa fa-file"></i> Upload</a>
                     </li>
                 </ol>
+                <h2><?php echo User::find_user_by_session_id($_SESSION['user_id'])->get_full_name(); ?>'s Photo Gallery</h2>
+                <?php $photos = $photo::all(); ?>
+
+                <?php foreach ($photos as $photo) : ?>
+                  <div class="col-sm-3">
+                    <h4><?php echo $photo->title; ?></h4>
+                    <img class="thumbnail img-responsive" src="images/<?php echo $photo->filename; ?>" alt="">
+                    <p><?php echo $photo->description; ?></p>
+                  </div>
+                <?php endforeach; ?>
             </div>
         </div>
         <!-- /.row -->

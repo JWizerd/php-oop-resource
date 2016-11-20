@@ -15,12 +15,12 @@
                     <small>Pictures</small>
                 </h1>
 
-        <!-- contains upload form validations logic and html form -->
+        <!-- contains upload form validations, crud logic and html form -->
         <?php include('includes/upload-form.php'); ?>
 
     </div>
     <!-- /.container-fluid -->
-    
+
   </div>
   <!-- /#page-wrapper -->
 
