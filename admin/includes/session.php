@@ -1,6 +1,6 @@
 <?php
 
-class Session {
+class Session extends User {
 
   private $signed_in = false;
   public $user_id;
