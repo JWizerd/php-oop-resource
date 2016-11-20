@@ -3,14 +3,15 @@
 class User {
 
   public $username, $password, $first_name, $last_name, $user_id;
-  public static $db_table = "users";
+  protected static $db_table = "users";
+  protected static $db_fields = ['username', 'password', 'first_name', 'last_name'];
 
   public static function all() {
     return self::the_query("SELECT * FROM " . self::$db_table . " ");
   }
 
   public static function find_by_id($id) {
-    $user = self::the_query("SELECT * FROM users WHERE user_id = $id ");
+    $user = self::the_query("SELECT * FROM " . self::$db_table . " WHERE user_id = $id ");
     return array_shift($user);
   }
 
@@ -59,16 +60,26 @@ class User {
     return ucfirst($this->first_name) . " " . ucfirst($this->last_name);
   }
 
+  public function get_properties() {
+    global $database;
+    $properties  = [];
+    foreach (self::$db_fields as $field) {
+      if (property_exists($this, $field)) {
+        $properties[$field] = $database->escape_string($this->$field);
+      }
+    }
+    return $properties;
+  }
+
   public function create() {
     global $database;
-    $sql  = "INSERT INTO users (username, password, first_name, last_name) ";
-    $sql .= "VALUES ('";
-    $sql .= $database->escape_string($this->username) . "', '";
-    $sql .= $database->escape_string($this->password) . "', '";
-    $sql .= $database->escape_string($this->first_name) . "', '";
-    $sql .= $database->escape_string($this->last_name) . "')";
 
-    if ($database->query($sql)) {
+    $properties = $this->get_properties();
+
+    $sql  = "INSERT INTO " . self::$db_table . "(" . implode(array_keys($properties), ', ') . ") ";
+    $sql .= "VALUES ('" . implode(array_values($properties), "','") . "') ";
+
+    if($database->query($sql)) {
       $this->user_id = $database->insert_id();
       return true;
     } else {
@@ -85,11 +96,17 @@ class User {
 
   public function update() {
     global $database;
-    $sql = "UPDATE users SET ";
-    $sql .= "username= '" . $database->escape_string($this->username) . "', ";
-    $sql .= "password= '" . $database->escape_string($this->password) . "', ";
-    $sql .= "first_name= '" . $database->escape_string($this->first_name) . "', ";
-    $sql .= "last_name= '" . $database->escape_string($this->last_name) . "' ";
+    $properties = $this->get_properties();
+    $properties_to_sql = [];
+
+    foreach ($properties as $key => $value) {
+      $properties_to_sql[] = "{$key} = '{$value}'";
+    }
+
+    implode($properties_to_sql, ', ');
+
+    $sql = "UPDATE " . self::$db_table . " SET ";
+    $sql .= implode($properties_to_sql, ', ') . " ";
     $sql .= "WHERE user_id= '" . $database->escape_string($this->user_id) . "'";
 
     $database->query($sql);
@@ -102,7 +119,7 @@ class User {
     global $session;
     $session->logout();
 
-    $sql = "DELETE FROM users WHERE user_id=" . $database->escape_string($this->user_id);
+    $sql = "DELETE FROM " . self::$db_table . " WHERE user_id=" . $database->escape_string($this->user_id);
     $database->query($sql);
 
     redirect("login.php");
