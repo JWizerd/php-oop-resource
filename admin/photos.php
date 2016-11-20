@@ -19,7 +19,7 @@
                         <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
                     </li>
                     <li class="active">
-                        <i class="fa fa-file"></i> Blank Page
+                        <a href="upload.php"><i class="fa fa-file"></i> Upload</a>
                     </li>
                 </ol>
             </div>
