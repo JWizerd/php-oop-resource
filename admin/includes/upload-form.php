@@ -1,30 +1,6 @@
 <?php
 if(isset($_POST["submit"])) {
-
-  $message = $photo->error_upload();
-
-  if($message == "Successfully Uploaded.") {
-
-    $temp_image      = $_FILES['image']['tmp_name'];
-    $image_file      = $_FILES['image']['name'];
-    $image_directory = "images";
-
-    move_uploaded_file($temp_image, $image_directory . "/" . $image_file);
-
-    $photo->title       = $_POST['title'];
-    $photo->description = $_POST['description'];
-    $photo->filename    = $_FILES['image']['name'];
-    $photo->type        = $_FILES['image']['type'];
-    $photo->size        = $_FILES['image']['size'];
-    $photo->user_id     = $_SESSION['user_id'];
-
-    $photo->create();
-    redirect('photos.php');
-
-  } else {
-    echo $message;
-  }
-
+  $photo->validate_image_upload();
 }
 ?>
 <div class="row">

@@ -23,15 +23,15 @@
                     </li>
                 </ol>
                 <h2><?php echo User::find_user_by_session_id($_SESSION['user_id'])->get_full_name(); ?>'s Photo Gallery</h2>
-                <?php $photos = $photo::all(); ?>
-
-                <?php foreach ($photos as $photo) : ?>
-                  <div class="col-sm-3">
-                    <h4><?php echo $photo->title; ?></h4>
-                    <img class="thumbnail img-responsive" src="images/<?php echo $photo->filename; ?>" alt="">
-                    <p><?php echo $photo->description; ?></p>
-                  </div>
-                <?php endforeach; ?>
+                <?php $photos = Photo::find_photos_by_user_id($_SESSION['user_id']); ?>
+                <?php if (!empty($photos)): ?>
+                  <?php foreach ($photos as $photo) : ?>
+                    <div class="col-sm-3">
+                      <h4><?php echo $photo->title; ?></h4>
+                      <img style="display:inline-block; width:40%; height: 150px; margin: 0 auto;" src="images/<?php echo $photo->filename; ?>" alt="">
+                    </div>
+                  <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
         <!-- /.row -->
