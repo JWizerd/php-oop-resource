@@ -13,7 +13,7 @@ if(isset($_POST["submit"])) {
       <textarea type="file" name="description" class="form-control">Tell us a bit about the photo fucker.</textarea>
     </div>
     <div class="form-group">
-      <input type="file" name="image" class="form-control">
+      <input type="file" name="image" class="form-control" require>
     </div>
     <input type="submit" name="submit" value="Submit" class="btn btn-primary">
   </form>

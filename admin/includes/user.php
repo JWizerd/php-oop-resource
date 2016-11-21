@@ -42,7 +42,19 @@ class User extends Db_object {
     $users = $database->query($sql)->fetch_array();
     return (!empty($users)) ? true : false;
   }
-  
+
+  public function delete_user() {
+    global $database;
+    global $session;
+    $session->logout();
+
+    $sql = "DELETE FROM " . self::$db_table . " WHERE user_id=" . $database->escape_string($this->user_id);
+    $database->query($sql);
+
+    redirect("login.php");
+    return ($database->connection->affected_rows == 1) ? true : false;
+  }
+
 }
 
 $user = new User();

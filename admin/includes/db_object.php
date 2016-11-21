@@ -82,7 +82,7 @@ class Db_object {
     return ($database->connection->affected_rows == 1) ? true : false;
   }
 
-  public function delete() {
+  public function delete_user() {
     global $database;
     global $session;
     $session->logout();
@@ -91,6 +91,15 @@ class Db_object {
     $database->query($sql);
 
     redirect("login.php");
+    return ($database->connection->affected_rows == 1) ? true : false;
+  }
+
+  public function delete() {
+    global $database;
+
+    $sql = "DELETE FROM " . static::$db_table . " WHERE user_id=" . $database->escape_string($this->user_id);
+    $database->query($sql);
+    
     return ($database->connection->affected_rows == 1) ? true : false;
   }
 

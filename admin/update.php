@@ -29,7 +29,7 @@ if(isset($_POST['submit'])) {
 // delete user if delete account button is clicked
 if(isset($_GET['delete'])) {
   if($_GET['delete'] == $user->user_id) {
-    $user->delete();
+    $user->delete_user();
   }
 }
 ?>

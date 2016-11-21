@@ -25,8 +25,13 @@ class Photo extends Db_object {
   }
 
   public function validate_image_upload() {
+    $file = $_FILES['image']['name'];
+    $target_path = IMAGE_DIR . DS . $file;
     $message = $this->error_upload();
-    if ($message == "Successfully Uploaded.") {
+
+    if (file_exists($target_path)) {
+      echo "This file already exists. <strong>" . $file . "</strong>";
+    } elseif ($message == "Successfully Uploaded.") {
       $this->upload_image();
     } else {
       echo $message;
@@ -35,11 +40,10 @@ class Photo extends Db_object {
 
   private function upload_image() {
     $this->temp_image      = $_FILES['image']['tmp_name'];
-    $this->image_file      = $_FILES['image']['name'];
     $this->image_directory = "images";
     $this->title       = $_POST['title'];
     $this->description = $_POST['description'];
-    $this->filename    = $_FILES['image']['name'];
+    $this->filename    = basename($_FILES['image']['name']);
     $this->type        = $_FILES['image']['type'];
     $this->size        = $_FILES['image']['size'];
     $this->user_id     = $_SESSION['user_id'];
@@ -49,11 +53,19 @@ class Photo extends Db_object {
   }
 
   private function move_image() {
-    move_uploaded_file($this->temp_image, $this->image_directory . "/" . $this->image_file);
+    move_uploaded_file($this->temp_image, $this->image_directory . "/" . $this->filename);
   }
 
   public static function find_photos_by_user_id($id) {
     return self::the_query("SELECT * FROM " . static::$db_table . " WHERE user_id = $id ");
+  }
+
+  public function delete_photo($photo_id) {
+    global $database;
+    $sql = "DELETE FROM " . self::$db_table . " WHERE photo_id=" . $database->escape_string($photo_id);
+    $database->query($sql);
+    unlink(IMAGE_DIR . DS . $this->filename);
+    return ($database->connection->affected_rows == 1) ? true : false;
   }
 }
 

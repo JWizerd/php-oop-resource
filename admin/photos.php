@@ -28,10 +28,18 @@
                   <?php foreach ($photos as $photo) : ?>
                     <div class="col-sm-3">
                       <h4><?php echo $photo->title; ?></h4>
-                      <img style="display:inline-block; width:40%; height: 150px; margin: 0 auto;" src="images/<?php echo $photo->filename; ?>" alt="">
+                        <img style="display:inline-block; width:40%; height: 150px; margin: 0 auto;" src="images/<?php echo $photo->filename; ?>" alt="">
+                        <a class="btn btn-danger" style="display:block; width:20%; margin-top: 20px;" href="photos.php?delete=<?php echo $photo->photo_id; ?>">Delete</a>
                     </div>
                   <?php endforeach; ?>
                 <?php endif; ?>
+                <?php
+                if (isset($_GET['delete'])) {
+                  $photo_id = $_GET['delete'];
+                  $photo->delete_photo($photo_id);
+                  redirect('photos.php');
+                }
+                ?>
             </div>
         </div>
         <!-- /.row -->
