@@ -19,6 +19,10 @@ class Photo extends Db_object {
   public $image_file;
   public $image_directory = "images";
 
+  public function image_path() {
+    return $this->image_directory.DS.$this->filename;
+  }
+
   public function error_upload() {
     $the_error = $_FILES['image']['error'];
     return $this->upload_errors[$the_error];
@@ -41,12 +45,12 @@ class Photo extends Db_object {
   private function upload_image() {
     $this->temp_image      = $_FILES['image']['tmp_name'];
     $this->image_directory = "images";
-    $this->title       = $_POST['title'];
-    $this->description = $_POST['description'];
-    $this->filename    = basename($_FILES['image']['name']);
-    $this->type        = $_FILES['image']['type'];
-    $this->size        = $_FILES['image']['size'];
-    $this->user_id     = $_SESSION['user_id'];
+    $this->title           = $_POST['title'];
+    $this->description     = $_POST['description'];
+    $this->filename        = basename($_FILES['image']['name']);
+    $this->type            = $_FILES['image']['type'];
+    $this->size            = $_FILES['image']['size'];
+    $this->user_id         = $_SESSION['user_id'];
     $this->move_image();
     $this->create();
     redirect('photos.php');
