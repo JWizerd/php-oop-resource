@@ -30,8 +30,6 @@
 
                   <div class="col-md-12">
 
-                    <a class="btn btn-danger" style="display:inline-block; width:20%; margin-top: 20px;" href="photos.php?delete=<?php echo $photo->photo_id; ?>">Delete</a>
-
                     <a class="btn btn-success" style="display:inline-block; width:20%; margin-top: 20px;" href="photos.php?edit=<?php echo $photo->photo_id; ?>">Edit</a>
 
                   </div>
@@ -41,13 +39,6 @@
             </div><!-- col-sm-3 -->
           <?php endforeach; ?>
         <?php endif; ?>
-        <?php
-        if (isset($_GET['delete'])) {
-          $photo_id = $_GET['delete'];
-          $photo->delete_photo($photo_id);
-          redirect('photos.php');
-        }
-        ?>
     </div>
 </div>
 <!-- /.row -->

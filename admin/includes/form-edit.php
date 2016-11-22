@@ -33,7 +33,7 @@
         ?>
 
         <div class="row">
-          <form action="" enctype="multipart/form-data" method="post" class="col-md-4">
+          <form action="" enctype="multipart/form-data" method="post" class="col-md-4" id="update-image">
             <h3><?php if(!empty($upload_errors)){ echo $message; } ?></h3>
             <div class="form-group">
               <input type="text" name="title" class="form-control" value="<?php echo $photo->title; ?>">
@@ -45,7 +45,6 @@
               <img style="display:block; height:150px; margin-bottom: 20px;" src="<?php echo $photo->image_path(); ?>" alt="">
               <input type="file" name="image" class="form-control" require>
             </div>
-            <input type="submit" name="update" value="Update" class="btn btn-primary">
           </form>
           <aside class="col-md-4 col-md-offset-2">
             <h2>Details</h2>
@@ -55,6 +54,8 @@
               <li><strong>Type:</strong> <?php echo $photo->type; ?></li>
               <li><strong>Size:</strong> <?php echo $photo->size / 100000; ?>MB</li>
             </ul>
+            <input type="submit" name="update" value="Update" class="btn btn-primary" form="update-image">
+            <a class="btn btn-danger" href="photos.php?delete=<?php echo $photo->photo_id; ?>">Delete</a>
           </aside>
         </div>
       </div><!-- /.row -->
