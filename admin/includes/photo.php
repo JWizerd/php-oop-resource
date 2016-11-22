@@ -34,7 +34,7 @@ class Photo extends Db_object {
     $message = $this->error_upload();
 
     if (file_exists($target_path)) {
-      echo "This file already exists. <strong>" . $file . "</strong>";
+      echo "This file already exists.";
     } elseif ($message == "Successfully Uploaded.") {
       echo $message;
       return true;
@@ -44,12 +44,21 @@ class Photo extends Db_object {
     }
   }
 
+  public function get_filename_by_id() {
+    $photo = Photo::find_by_id($this->photo_id, "photo_id");
+    return $photo->filename;
+  }
+
   private function set_image_properties() {
     $this->temp_image      = $_FILES['image']['tmp_name'];
     $this->image_directory = "images";
     $this->title           = $_POST['title'];
     $this->description     = $_POST['description'];
-    $this->filename        = basename($_FILES['image']['name']);
+    if(empty($_FILES['image']['name'])) {
+      $this->filename = $this->get_filename_by_id();
+    } else {
+      $this->filename = basename($_FILES['image']['name']);
+    }
     $this->type            = $_FILES['image']['type'];
     $this->size            = $_FILES['image']['size'];
     $this->user_id         = $_SESSION['user_id'];

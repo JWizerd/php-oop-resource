@@ -24,9 +24,7 @@
 
           if(isset($_POST["update"])) {
 
-            if($photo->validate_image_upload() == "file already exists.") {
-              $photo->update_image("photo_id");
-            }
+            $photo->update_image("photo_id");
 
           }
         }
