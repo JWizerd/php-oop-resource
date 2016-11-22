@@ -86,7 +86,7 @@ class Db_object {
   public function delete($id_type) {
     global $database;
 
-    $sql = "DELETE FROM " . static::$db_table . " WHERE {$id_type}=" . $database->escape_string($this->user_id);
+    $sql = "DELETE FROM " . static::$db_table . " WHERE {$id_type}=" . $database->escape_string($this->$id_type);
     $database->query($sql);
 
     return ($database->connection->affected_rows == 1) ? true : false;
