@@ -72,7 +72,6 @@ class Photo extends Db_object {
   }
 
   public function update_image($id_type) {
-    $this->remove_photo_from_dir();
     $this->set_image_properties();
     $this->move_image();
     $this->update($id_type);
