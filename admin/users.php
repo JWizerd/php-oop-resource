@@ -1,4 +1,11 @@
 <?php include("includes/header.php"); ?>
+<?php
+  if(!$session->is_signed_in()) {
+    redirect("login.php");
+  } elseif ($_SESSION['username'] != 'admin') {
+    redirect('index.php');
+  }
+?>
 
   <!-- Navigation -->
   <?php include('includes/navigation.php'); ?>

@@ -18,6 +18,7 @@ class Session extends User {
   public function login($user) {
     if($user) {
       $this->user_id = $_SESSION['user_id'] = $user->user_id;
+      $this->username = $_SESSION['username'] = $user->username;
       $this->signed_in = true;
     }
   }
