@@ -4,6 +4,7 @@ class Db_object {
 
   protected static $db_table = "";
   protected static $db_fields = [];
+  protected $id_type = "";
 
   public static function all() {
     return self::the_query("SELECT * FROM " . static::$db_table . " ");
@@ -82,24 +83,12 @@ class Db_object {
     return ($database->connection->affected_rows == 1) ? true : false;
   }
 
-  public function delete_user() {
-    global $database;
-    global $session;
-    $session->logout();
-
-    $sql = "DELETE FROM " . static::$db_table . " WHERE user_id=" . $database->escape_string($this->user_id);
-    $database->query($sql);
-
-    redirect("login.php");
-    return ($database->connection->affected_rows == 1) ? true : false;
-  }
-
-  public function delete() {
+  public function delete($id_type) {
     global $database;
 
-    $sql = "DELETE FROM " . static::$db_table . " WHERE user_id=" . $database->escape_string($this->user_id);
+    $sql = "DELETE FROM " . static::$db_table . " WHERE {$id_type}=" . $database->escape_string($this->user_id);
     $database->query($sql);
-    
+
     return ($database->connection->affected_rows == 1) ? true : false;
   }
 

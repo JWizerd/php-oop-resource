@@ -68,8 +68,12 @@ class Photo extends Db_object {
     global $database;
     $sql = "DELETE FROM " . self::$db_table . " WHERE photo_id=" . $database->escape_string($photo_id);
     $database->query($sql);
-    unlink(IMAGE_DIR . DS . $this->filename);
+    $this->remove_photo_from_dir();
     return ($database->connection->affected_rows == 1) ? true : false;
+  }
+
+  private function remove_photo_from_dir() {
+    unlink(IMAGE_DIR . DS . $this->filename);
   }
 }
 

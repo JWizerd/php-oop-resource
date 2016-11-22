@@ -12,11 +12,11 @@
             <div class="col-lg-12">
                 <h1 class="page-header">
                     UPLOAD
-                    <small>Pictures</small>
+                    <small>Photos</small>
                 </h1>
 
         <!-- contains upload form validations, crud logic and html form -->
-        <?php include('includes/upload-form.php'); ?>
+        <?php include('includes/form-upload.php'); ?>
 
     </div>
     <!-- /.container-fluid -->
