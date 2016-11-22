@@ -1,6 +1,6 @@
 <!-- Page Heading -->
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-12">
         <h1 class="page-header">
             PHOTOS
             <small>Edit</small>
@@ -47,10 +47,18 @@
             </div>
             <input type="submit" name="update" value="Update" class="btn btn-primary">
           </form>
+          <aside class="col-md-4 col-md-offset-2">
+            <h2>Details</h2>
+            <ul style="list-style:none; padding-left: 0;">
+              <li><strong>ID:</strong> <?php echo $photo_id; ?></li>
+              <li><strong>Filename:</strong> <?php echo $photo->filename; ?></li>
+              <li><strong>Type:</strong> <?php echo $photo->type; ?></li>
+              <li><strong>Size:</strong> <?php echo $photo->size / 100000; ?>MB</li>
+            </ul>
+          </aside>
         </div>
-        </div>
-        </div>
-        <!-- /.row -->
+      </div><!-- /.row -->
     </div>
+  </div>
 </div>
 <!-- /.row -->
