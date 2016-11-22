@@ -16,7 +16,7 @@ if(isset($_POST['submit'])) {
   $user->first_name = $first_name;
   $user->last_name = $last_name;
 
-  if ($user->update()) {
+  if ($user->update("user_id")) {
     redirect('index.php');
   }
 }

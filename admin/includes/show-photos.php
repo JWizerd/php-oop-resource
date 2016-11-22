@@ -7,7 +7,7 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-              <i class="fa fa-dashboard"></i><a href="index.php">Dashboard</a>
+              <i class="fa fa-dashboard"></i><a href="index.php"> Dashboard</a>
             </li>
             <li class="active">
                 <a href="upload.php"><i class="fa fa-file"></i> Upload</a>
@@ -32,7 +32,7 @@
 
                     <a class="btn btn-danger" style="display:inline-block; width:20%; margin-top: 20px;" href="photos.php?delete=<?php echo $photo->photo_id; ?>">Delete</a>
 
-                    <a class="btn btn-success" style="display:inline-block; width:20%; margin-top: 20px;" href="photos.php?edit=&photo_id<?php echo $photo->photo_id; ?>">Edit</a>
+                    <a class="btn btn-success" style="display:inline-block; width:20%; margin-top: 20px;" href="photos.php?edit=<?php echo $photo->photo_id; ?>">Edit</a>
 
                   </div>
 

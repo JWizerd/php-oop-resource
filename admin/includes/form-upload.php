@@ -1,6 +1,8 @@
 <?php
 if(isset($_POST["submit"])) {
-  $photo->validate_image_upload();
+  if($photo->validate_image_upload()) {
+    $photo->upload_image();
+  }
 }
 ?>
 <div class="row">

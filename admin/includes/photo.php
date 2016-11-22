@@ -36,13 +36,15 @@ class Photo extends Db_object {
     if (file_exists($target_path)) {
       echo "This file already exists. <strong>" . $file . "</strong>";
     } elseif ($message == "Successfully Uploaded.") {
-      $this->upload_image();
+      echo $message;
+      return true;
     } else {
       echo $message;
+      return false;
     }
   }
 
-  private function upload_image() {
+  private function set_image_properties() {
     $this->temp_image      = $_FILES['image']['tmp_name'];
     $this->image_directory = "images";
     $this->title           = $_POST['title'];
@@ -51,8 +53,21 @@ class Photo extends Db_object {
     $this->type            = $_FILES['image']['type'];
     $this->size            = $_FILES['image']['size'];
     $this->user_id         = $_SESSION['user_id'];
+  }
+
+  public function upload_image() {
+    $this->set_image_properties();
     $this->move_image();
     $this->create();
+    redirect('photos.php');
+  }
+
+
+  public function update_image($id_type) {
+    $this->remove_photo_from_dir();
+    $this->set_image_properties();
+    $this->move_image();
+    $this->update($id_type);
     redirect('photos.php');
   }
 

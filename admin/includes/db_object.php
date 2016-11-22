@@ -10,8 +10,8 @@ class Db_object {
     return self::the_query("SELECT * FROM " . static::$db_table . " ");
   }
 
-  public static function find_by_id($id) {
-    $user = self::the_query("SELECT * FROM " . static::$db_table . " WHERE user_id = $id ");
+  public static function find_by_id($id, $id_type) {
+    $user = static::the_query("SELECT * FROM " . static::$db_table . " WHERE $id_type = $id ");
     return array_shift($user);
   }
 
@@ -63,7 +63,7 @@ class Db_object {
     }
   }
 
-  public function update() {
+  public function update($id_type) {
     global $database;
     $properties = $this->get_properties();
     $properties_to_sql = [];
@@ -76,7 +76,7 @@ class Db_object {
 
     $sql = "UPDATE " . static::$db_table . " SET ";
     $sql .= implode($properties_to_sql, ', ') . " ";
-    $sql .= "WHERE user_id= '" . $database->escape_string($this->user_id) . "'";
+    $sql .= "WHERE $id_type= '" . $database->escape_string($this->$id_type) . "'";
 
     $database->query($sql);
 
