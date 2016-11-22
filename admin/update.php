@@ -20,7 +20,7 @@ include('includes/form-update.php');
 
     <div class="form-group">
     	 <label for="password">Password</label>
-    	 <input type="password" class="form-control" name="password" value="<?php echo $user->username ?>">
+    	 <input type="password" class="form-control" name="password" value="<?php echo $user->username ?>" required>
     </div>
 
     <div class="form-group">

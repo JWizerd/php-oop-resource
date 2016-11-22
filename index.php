@@ -30,6 +30,7 @@
           <?php foreach ($users as $user): ?>
             <div class="col-md-3">
               <h4><?php echo $user->get_full_name(); ?></h4>
+              <a href="user_gallery.php?user_id=<?php echo $user->user_id; ?>">View Gallery</a>
             </div>
           <?php endforeach; ?>
         </div>
