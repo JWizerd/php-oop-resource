@@ -18,7 +18,6 @@
         </ol>
 
         <?php
-
         if(isset($_GET['edit'])) {
           $photo_id = $_GET['edit'];
           $photo = Photo::find_by_id($photo_id, "photo_id");
@@ -32,6 +31,7 @@
           }
         }
         ?>
+
         <div class="row">
           <form action="" enctype="multipart/form-data" method="post" class="col-md-4">
             <h3><?php if(!empty($upload_errors)){ echo $message; } ?></h3>

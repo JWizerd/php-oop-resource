@@ -62,7 +62,6 @@ class Photo extends Db_object {
     redirect('photos.php');
   }
 
-
   public function update_image($id_type) {
     $this->remove_photo_from_dir();
     $this->set_image_properties();
