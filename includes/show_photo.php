@@ -18,6 +18,7 @@
 <hr>
 
 <!-- Post Content -->
+<img class="img-responsive" src="admin/<?php echo $photo->image_path(); ?>" alt="">
 <p class="lead"><?php echo $photo->description; ?></p>
 
 
