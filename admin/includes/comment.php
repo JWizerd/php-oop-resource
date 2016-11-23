@@ -1,7 +1,6 @@
 <?php
 Class Comment extends Db_object {
-public function testing() {
-  echo "from comment";
-}
+  protected static $db_table = 'comments';
+  protected static $db_fields = ['id', 'user_id', 'photo_id', 'comment'];
 }
 $comment = new Comment();
