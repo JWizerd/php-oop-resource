@@ -1,11 +1,17 @@
+<?php
+if (isset($_POST['add_comment'])) {
+  echo "<strong>" . $_POST['comment'] . "</strong>";
+}
+?>
+
 <!-- Comments Form -->
 <div class="well">
     <h4>Leave a Comment:</h4>
-    <form role="form">
+    <form role="form" method="post" action="user_gallery.php?user_id=<?php echo $user->user_id; ?>">
         <div class="form-group">
-            <textarea class="form-control" rows="3"></textarea>
+            <textarea class="form-control" rows="3" name="comment"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" name="add_comment">Submit</button>
     </form>
 </div>
 

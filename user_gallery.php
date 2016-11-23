@@ -25,7 +25,7 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
 
       <!-- Blog Comments -->
-
+      <?php include('includes/comments.php') ?>
     </div>
     <div class="col-md-4 well">
       <h2>Gallery</h2>
